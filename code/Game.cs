@@ -1,4 +1,6 @@
-﻿namespace GameBase;
+﻿using GameBase.Systems.GameLoop.States;
+
+namespace GameBase;
 
 public partial class MyGame : Game
 {
@@ -8,8 +10,10 @@ public partial class MyGame : Game
 
 		Transmit = TransmitType.Always;
 
+		State = new DefaultState();
+		State.Start();
 
-		// do init stuff here, not in ctor
+		// do server init stuff here, not in ctor
 	}
 
 	public override void ClientJoined( Client client )

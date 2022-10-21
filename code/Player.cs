@@ -25,21 +25,44 @@ namespace GameBase
 		{
 			base.Simulate( cl );
 
+			if ( IsServer )
+				ServerSimulate();
+		}
+
+		private void ServerSimulate()
+		{
 			if ( Input.Pressed( InputButton.PrimaryAttack ) )
 			{
-				if ( IsServer )
+				var prop = new Prop();
+				prop.Position = EyePosition + EyeRotation.Forward * 100;
+
+				var model = CloudAsset.LoadModel( $"baik.woodenbarrel", this );
+				prop.Model = model;
+
+				var material = CloudAsset.LoadMaterial( $"mungus.garry2", this );
+				prop.SetMaterialOverride( material );
+
+				var sound = CloudAsset.LoadSound( $"trend.spectrometer", this );
+				Sound.FromEntity( sound, this );
+			}
+
+
+
+			if ( Input.Pressed( InputButton.SecondaryAttack ) )
+			{
+				if ( Game.Current is MyGame game )
 				{
-					var prop = new Prop();
-					prop.Position = EyePosition + EyeRotation.Forward * 100;
+					Log.Debug( $"{game.State?.Time}" );
+					game.State?.Toggle();
+				}
+			}
 
-					var model = CloudAsset.LoadModel( $"baik.woodenbarrel", this );
-					prop.Model = model;
-
-					var material = CloudAsset.LoadMaterial( $"mungus.garry2", this );
-					prop.SetMaterialOverride( material );
-
-					var sound = CloudAsset.LoadSound( $"trend.spectrometer", this );
-					Sound.FromEntity( sound, this );
+			if ( Input.Pressed( InputButton.Reload ) )
+			{
+				if ( Game.Current is MyGame game )
+				{
+					Log.Debug( $"{game.State?.Time}" );
+					game.State?.Restart();
 				}
 			}
 		}

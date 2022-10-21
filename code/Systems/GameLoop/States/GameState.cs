@@ -72,6 +72,7 @@ public abstract partial class GameState : Entity, IGameState
 		}
 
 		IsRunning = true;
+		_TimeSince = 0;
 
 		// first time starting, reset all
 		if ( !_Init )

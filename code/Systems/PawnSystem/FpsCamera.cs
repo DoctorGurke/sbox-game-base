@@ -34,8 +34,6 @@ public class FpsCamera : CameraMode
 
 		Rotation = pawn.EyeRotation;
 
-		Log.Info( pawn );
-
 		Viewer = pawn;
 		lastPos = Position;
 	}

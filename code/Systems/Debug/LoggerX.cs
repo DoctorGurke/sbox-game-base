@@ -1,6 +1,6 @@
 ﻿namespace GameBase.Systems.Debug;
 
-public static class DebugLogX
+public static class LoggerX
 {
 	public static void Debug( this Logger log, object message )
 	{

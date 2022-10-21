@@ -4,6 +4,21 @@ namespace GameBase;
 
 public partial class MyGame
 {
+	public GameState? State
+	{
+		get
+		{
+			return _State;
+		}
+		set
+		{
+			Host.AssertServer();
+			_State?.Kill();
+			_State = null;
+			_State = value;
+		}
+	}
+
 	[Net]
-	public GameState? State { get; set; }
+	private GameState? _State { get; set; }
 }
